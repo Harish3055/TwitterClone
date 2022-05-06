@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Profile / Twitter</title>
+    <link rel="shortcut icon" href="{{url_for('static', filename='./images/title.png')}}" />
+    <link href="{{url_for('static', filename='./style.css')}}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  </head>
+  <body class="theme text-white">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3 size theme  border-dark font">{% include 'SideNavBar.html' %}</div>
+        <div class="col-md-5 theme border-left border-right border-dark">
+          
+          <div class="container-fluid border-bottom border-dark" style="height:50x;">
+            <h5 class="mt-1" style="font-size:22px;">{{data[0]}}</h5>
+            <h6 class="text-dark" style="margin-top:-8px;font-size:14px;">{{data[3]}} Tweets</h6>
+          </div>
+          <div class="bg-dark container-fluid border-bottom border-dark" style="height:190px;"></div>
+          <div class="brand_logo_container ml-3 p-1">
+            <img src="{{data[2]}}" class="brand_logo" alt="Logo" width="130" />
+          </div>
+          <h5 style="margin-top:90px;font-size:22px;">{{data[0]}}</h5>
+          <h6 class="text-dark" style="margin-top:-8px;font-size:15px;">@{{data[1]}}</h6>
+          {% if flag==1%}
+          <br>
+          <h3 style="font-family:'Source Sans Pro', sans-serif;">Popular Tweets @</h3>
+          <div class="container scrollView   mb-5" style="max-height:300px;">
+            {% for val in popular %}
+            <div class="container mt-2 bg-dark py-3 text-white fix"  style="border-radius:15px;">
+                  <div class="row">
+                     <div class="col-md-1">
+                        <img src="{{data[2]}}" style="border-radius:100px;"width="50"/>
+                     </div>
+                     <div class="col-md-8 ">
+                        <strong>
+                          
+                           <p style="display:inline" class="ml-3">{{data[0]}}</p>
+                        </strong>
+                        <p class="ml-3 text-light" style="font-size:15px;">{{data[1]}}</p>
+                     </div>
+                     <div class="col-md-3 " style="font-size:15px;">
+                        {{val[1]}} 
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-1"></div>
+                     <div class="col-md-9" style="word-wrap: break-word;">
+                       <p class="ml-3">
+                        {{val[0]}}
+                       </p>
+                     </div>
+                     
+                  </div>
+                
+               </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if rflag==1%}
+          <br>
+          <h3 style="font-family:'Source Sans Pro', sans-serif;">ReTweets @</h3>
+          <div class="container scrollView   mb-5" style="max-height:300px;">
+            {% for val in retweet %}
+            <div class="container mt-2 bg-dark py-3 text-white fix"  style="border-radius:15px;">
+                  <div class="row">
+                     <div class="col-md-1">
+                        <img src="{{val[4]}}" style="border-radius:100px;"width="50"/>
+                     </div>
+                     <div class="col-md-8 ">
+                        <strong>
+                          
+                           <p style="display:inline" class="ml-3">{{val[1]}}</p>
+                        </strong>
+                        <p class="ml-3 text-light" style="font-size:15px;">{{val[2]}}</p>
+                     </div>
+                     <div class="col-md-3 " style="font-size:15px;">
+                        {{val[3]}} 
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-md-1"></div>
+                     <div class="col-md-9" style="word-wrap: break-word;">
+                       <p class="ml-3">
+                        {{val[5]}}
+                       </p>
+                     </div>
+                     
+                  </div>
+                
+               </div>
+            {% endfor %}
+          </div>
+          {% endif %}
+          </div>
+        
+       
+       <div class="col-md-4 theme mt-4">{% include 'news.html' %}</div>
+      </div>
+    </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='./script.js')}}"></script>
+  </body>
+</html>
